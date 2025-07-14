@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../tannninn_css/gakuseijyouhousyousai.css" />
+    <title>学生詳細情報</title>
+</head>
+<body>
+
+    <div class="container">
+        <div class="main-title">学生詳細情報</div>
+
+        <div class="info-block">
+            <div class="info-row">
+                <label for="student-id">学籍番号</label>
+                <input type="text" id="student-id" value="" readonly>
+            </div>
+            <div class="info-row">
+                <label for="department-course">学科・コース</label>
+                <input type="text" id="department-course" value="" readonly>
+            </div>
+            <div class="info-row">
+                <label for="grade">学年</label>
+                <input type="text" id="grade" value="" style="width: 80px; flex-grow: 0;" readonly>
+                <label for="enrollment-year" style="margin-left: 20px;">入学年度</label>
+                <input type="text" id="enrollment-year" value="" style="width: 80px; flex-grow: 0;" readonly>
+            </div>
+            <div class="info-row">
+                <label for="name">名前</label>
+                <input type="text" id="name" value="" readonly>
+            </div>
+            <div class="info-row">
+                <label for="name-furigana">名前（フリガナ）</label>
+                <div class="name-furigana-input">
+                    <input type="text" id="name-furigana" value="" readonly>
+                </div>
+            </div>
+            <div class="info-row">
+                <label for="enrollment-status">在籍状況</label>
+                <input type="text" id="enrollment-status" value="" readonly>
+            </div>
+        </div>
+
+        <div class="attendance-info">
+            <div class="attendance-item">
+                <label for="total-attendance">総出席率</label>
+                <input type="text" id="total-attendance" value="" readonly>
+                <span class="percentage">%</span>
+            </div>
+            <div class="attendance-item">
+                <label for="absent-count">欠課数</label>
+                <input type="text" id="absent-count" value="" readonly>
+            </div>
+        </div>
+
+        <div class="subjects-block">
+            <h3>履修科目</h3>
+            <div class="subjects-table-container">
+                <table class="subjects-table">
+                    <thead>
+                        <tr>
+                            <th>科目名</th>
+                            <th>欠課</th>
+                            <th>欠席</th>
+                            <th>遅刻</th>
+                            <th>早退</th>
+                            <th>出停</th>
+                            <th>詳細</th>
+                        </tr>
+                    </thead>
+                    <tbody id="subjects-table-body">
+                        </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="back-button-container">
+            <a href="javascript:history.back()" class="back-button">戻る</a>
+        </div>
+    </div>
+
+    <script src="../tanninn_js/gakuseisyousai.js"></script>
+
+</body>
+</html>

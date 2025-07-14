@@ -1,0 +1,150 @@
+        body {
+            font-family: sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #add8e6; /* Light blue background */
+            margin: 0;
+        }
+        .container {
+            background-color: white;
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            width: 450px; /* Adjust as needed */
+            box-sizing: border-box;
+        }
+        .form-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            width: 120px; /* Adjust label width as needed */
+            margin-right: 10px;
+            text-align: right;
+            white-space: nowrap;
+        }
+        .form-group input[type="text"],
+        .form-group select {
+            flex-grow: 1;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            appearance: none; /* Remove default dropdown arrow */
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23000000%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13.2-6.4H18.5a17.6%2017.6%200%200%200-13.2%206.4c-1.7%201.7-2.7%204-2.7%206.4s1%204.7%202.7%206.4l132.8%20132.8c1.7%201.7%204%202.7%206.4%202.7s4.7-1%206.4-2.7L287%2082.2c1.7-1.7%202.7-4%202.7-6.4s-1-4.7-2.7-6.4z%22%2F%3E%3C%2Fsvg%3E');
+            background-repeat: no-repeat;
+            background-position: right 8px center;
+            background-size: 12px;
+            padding-right: 30px; /* Make space for the custom arrow */
+        }
+
+        /* Table specific styles */
+        .data-table-container {
+            border: 1px solid black;
+            height: 150px; /* Adjust height as needed */
+            overflow-y: auto;
+            /* ★★ 追加・変更点 ★★ */
+            overflow-x: auto; /* 横スクロールを可能にする */
+            margin-bottom: 15px;
+        }
+        table {
+            width: 100%;
+            /* ★★ 変更点 ★★ */
+            min-width: 400px; /* コンテンツが横に広がりすぎた場合にスクロールを発生させる最小幅 */
+                               /* .container の幅 (450px) より小さく設定すると、
+                                  container に収まりきらないときに横スクロールが出やすくなります。
+                                  実際のコンテンツの長さによって調整してください。 */
+            border-collapse: collapse; /* Removes spacing between cells */
+            /* table-layout: fixed; はコメントアウトまたは削除。
+               コンテンツの長さに応じて列幅を自動調整させるため。
+               もし厳密な列幅制御が必要なら fixed を残し、th/td に width を指定。 */
+        }
+        th, td {
+            border: 1px solid #ccc; /* Lighter border for inner cells */
+            padding: 8px 5px;
+            text-align: center;
+            /* white-space: nowrap; を削除またはコメントアウト
+               長いテキストでセル内で改行させたい場合は nowrap を削除。
+               もし一行表示でスクロールさせたい場合は nowrap を残す。
+               今回は横スクロールが目的なので、長い文字列は nowrap の方が効果がわかりやすい。
+               状況に応じて調整してください。 */
+            white-space: nowrap; /* テキストがセル内で改行しないようにする */
+            overflow: hidden; /* overflowing text */
+            text-overflow: ellipsis; /* Add ellipsis for overflow */
+        }
+        th {
+            background-color: #f0f0f0;
+            font-weight: bold;
+            border-top: none; /* No top border for header */
+            border-left: none;
+            border-right: none;
+            border-bottom: 1px solid black; /* Stronger bottom border for header */
+        }
+        th:first-child { border-left: 1px solid black; } /* Left border for first header */
+        th:last-child { border-right: 1px solid black; } /* Right border for last header */
+
+        td {
+            border-top: none; /* No top border for data cells */
+            border-left: none;
+            border-right: none;
+            border-bottom: 1px dashed #eee; /* Lighter dashed bottom border for data cells */
+        }
+        tr:last-child td {
+            border-bottom: none; /* No bottom border for the last row's cells */
+        }
+        td:first-child { border-left: 1px solid black; } /* Left border for first data cell */
+        td:last-child { border-right: 1px solid black; } /* Right border for last data cell */
+
+
+        .reset-button-container {
+            text-align: left;
+            margin-bottom: 10px;
+        }
+        .reset-button {
+            padding: 8px 15px;
+            border: 1px solid #ccc;
+            background-color: #f0f0f0;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .reset-button:hover {
+            background-color: #e0e0e0;
+        }
+        .status-and-buttons {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-top: 20px;
+        }
+        .status-text {
+            font-size: 0.9em;
+            color: #555;
+            flex-grow: 1;
+            text-align: right;
+            padding-right: 10px;
+        }
+        .action-buttons button {
+            padding: 10px 20px;
+            margin-left: 10px;
+            border: 1px solid #ccc;
+            background-color: #f0f0f0;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .action-buttons button:hover {
+            background-color: #e0e0e0;
+        }
+        .action-buttons button.register {
+            background-color: #007bff; /* Example blue for register */
+            color: white;
+            border-color: #007bff;
+        }
+        .action-buttons button.register:hover {
+            background-color: #0056b3;
+        }

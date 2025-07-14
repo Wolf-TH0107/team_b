@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>出席簿管理システム - 管理者画面</title>
+    <link rel="stylesheet" href="kanri.css"> 
+</head>
+<body>
+    <div class="header">
+        <h1>出席簿管理システム - 管理者</h1>
+        <div class="user-info">
+            ようこそ、管理者さん！ <a href="logout.html">ログアウト</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <aside class="sidebar">
+            <nav>
+                <ul>
+                    <li><a href="#" class="active" onclick="showSection('dashboard')">ダッシュボード</a></li>
+                    <li><a href="#" onclick="showSection('users')">ユーザー管理</a></li>
+                    <li><a href="#" onclick="showSection('classes')">クラス/科目管理</a></li>
+                    <li><a href="#" onclick="showSection('attendance')">出席データ</a></li>
+                    <li><a href="#" onclick="showSection('settings')">設定</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <section id="dashboard" class="content-section active">
+                <h2 class="section-title">ダッシュボード</h2>
+                <div class="dashboard-grid">
+                    <div class="card">
+                        <h3>総生徒数</h3>
+                        <p>1500</p>
+                        <a href="#" class="action-link" onclick="showSection('users')">生徒一覧を見る</a>
+                    </div>
+                    <div class="card">
+                        <h3>総教師数</h3>
+                        <p>60</p>
+                        <a href="#" class="action-link" onclick="showSection('users')">教師一覧を見る</a>
+                    </div>
+                    <div class="card">
+                        <h3>登録クラス数</h3>
+                        <p>50</p>
+                        <a href="#" class="action-link" onclick="showSection('classes')">クラス一覧を見る</a>
+                    </div>
+                    <div class="card">
+                        <h3>今日の欠席者</h3>
+                        <p>12</p>
+                        <a href="#" class="action-link" onclick="showSection('attendance')">詳細を見る</a>
+                    </div>
+                </div>
+
+                <div class="data-table-container">
+                    <h3>最近のシステム活動</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>日時</th>
+                                <th>活動内容</th>
+                                <th>ユーザー</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>2025-06-19 10:30</td>
+                                <td>生徒「山田 太郎」の情報を更新</td>
+                                <td>管理者A</td>
+                            </tr>
+                            <tr>
+                                <td>2025-06-19 09:15</td>
+                                <td>クラス「3年A組」に新しい生徒を追加</td>
+                                <td>管理者B</td>
+                            </tr>
+                            <tr>
+                                <td>2025-06-18 17:00</td>
+                                <td>システム設定を更新</td>
+                                <td>管理者A</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section id="users" class="content-section">
+                <h2 class="section-title">ユーザー管理</h2>
+
+                <h3>新規ユーザー追加（個別）</h3>
+                <div class="form-container">
+                    <div class="form-group">
+                        <label for="userName">名前:</label>
+                        <input type="text" id="userName" name="userName">
+                    </div>
+                    <div class="form-group">
+                        <label for="userEmail">メールアドレス:</label>
+                        <input type="email" id="userEmail" name="userEmail">
+                    </div>
+                    <div class="form-group">
+                        <label for="userPassword">パスワード (初回設定):</label>
+                        <input type="password" id="userPassword" name="userPassword">
+                    </div>
+                    <div class="form-group">
+                        <label for="userRole">役割:</label>
+                        <select id="userRole" name="userRole">
+                            <option value="student">生徒</option>
+                            <option value="teacher">教師</option>
+                            <option value="admin">管理者</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit">ユーザー登録</button>
+                    </div>
+                </div>
+
+                <h3>ユーザー一括登録（CSVアップロード）</h3>
+                <div class="form-container">
+                    <div class="bulk-upload-info">
+                        <p>ユーザーを一括で登録するには、以下の形式のCSVファイルをアップロードしてください。</p>
+                        <p><strong>CSV形式:</strong> <code>名前,メールアドレス,役割,初期パスワード</code></p>
+                        <p>例: <code>山田太郎,yamada@example.com,生徒,pass123</code></p>
+                        <p>役割は「生徒」「教師」「管理者」のいずれかを指定してください。</p>
+                        <p><a href="user_template.csv" download="user_template.csv">CSVテンプレートをダウンロード</a></p>
+                    </div>
+                    <div class="form-group">
+                        <label for="userCsvFile">CSVファイルを選択:</label>
+                        <input type="file" id="userCsvFile" name="userCsvFile" accept=".csv">
+                    </div>
+                    <div class="form-group">
+                        <button type="button" onclick="handleBulkUpload()">CSVアップロード</button>
+                    </div>
+                </div>
+
+                <h3>既存ユーザー一覧</h3>
+                <div class="data-table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>名前</th>
+                                <th>メールアドレス</th>
+                                <th>役割</th>
+                                <th>アクション</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>001</td>
+                                <td>山田 太郎</td>
+                                <td>yamada@example.com</td>
+                                <td>生徒</td>
+                                <td class="action-buttons">
+                                    <button class="edit">編集</button>
+                                    <button class="delete">削除</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>002</td>
+                                <td>鈴木 花子</td>
+                                <td>suzuki@example.com</td>
+                                <td>教師</td>
+                                <td class="action-buttons">
+                                    <button class="edit">編集</button>
+                                    <button class="delete">削除</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>003</td>
+                                <td>田中 賢一</td>
+                                <td>tanaka@example.com</td>
+                                <td>管理者</td>
+                                <td class="action-buttons">
+                                    <button class="edit">編集</button>
+                                    <button class="delete">削除</button>
+                                </td>
+                            </tr>
+                            </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section id="classes" class="content-section">
+                <h2 class="section-title">クラス/科目管理</h2>
+                <button class="action-buttons" onclick="alert('新規クラス/科目追加フォームへ遷移')">新規追加</button>
+                <div class="data-table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>クラス名/科目名</th>
+                                <th>担当教師</th>
+                                <th>生徒数</th>
+                                <th>アクション</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>C01</td>
+                                <td>1年A組</td>
+                                <td>佐藤 先生</td>
+                                <td>30</td>
+                                <td class="action-buttons">
+                                    <button class="edit">編集</button>
+                                    <button class="delete">削除</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>S01</td>
+                                <td>数学I</td>
+                                <td>田中 先生</td>
+                                <td>25</td>
+                                <td class="action-buttons">
+                                    <button class="edit">編集</button>
+                                    <button class="delete">削除</button>
+                                </td>
+                            </tr>
+                            </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section id="attendance" class="content-section">
+                <h2 class="section-title">出席データ</h2>
+                <p>特定のクラスや生徒の出席状況を検索・表示できます。</p>
+                <div class="form-container">
+                    <div class="form-group">
+                        <label for="attendanceClass">クラスを選択:</label>
+                        <select id="attendanceClass" name="attendanceClass">
+                            <option value="">全てのクラス</option>
+                            <option value="1a">1年A組</option>
+                            <option value="2b">2年B組</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="attendanceDate">日付:</label>
+                        <input type="date" id="attendanceDate" name="attendanceDate">
+                    </div>
+                    <div class="form-group">
+                        <button type="button">出席データを表示</button>
+                    </div>
+                </div>
+
+                <div class="data-table-container">
+                    <h3>2025-06-19 1年A組 出席状況</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>生徒名</th>
+                                <th>状況</th>
+                                <th>備考</th>
+                                <th>アクション</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>山田 太郎</td>
+                                <td style="color: green;">出席</td>
+                                <td>-</td>
+                                <td class="action-buttons">
+                                    <button class="edit">編集</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>佐々木 健太</td>
+                                <td style="color: red;">欠席</td>
+                                <td>体調不良</td>
+                                <td class="action-buttons">
+                                    <button class="edit">編集</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>吉田 結衣</td>
+                                <td style="color: orange;">遅刻</td>
+                                <td>電車遅延</td>
+                                <td class="action-buttons">
+                                    <button class="edit">編集</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section id="settings" class="content-section">
+                <h2 class="section-title">設定</h2>
+                <div class="form-container">
+                    <h3>システム設定</h3>
+                    <div class="form-group">
+                        <label for="systemName">システム名:</label>
+                        <input type="text" id="systemName" name="systemName" value="出席簿管理システム">
+                    </div>
+                    <div class="form-group">
+                        <label for="defaultRole">新規ユーザーのデフォルト役割:</label>
+                        <select id="defaultRole" name="defaultRole">
+                            <option value="student">生徒</option>
+                            <option value="teacher">教師</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit">設定を保存</button>
+                    </div>
+                </div>
+
+                <div class="form-container" style="margin-top: 30px;">
+                    <h3>パスワード変更</h3>
+                    <div class="form-group">
+                        <label for="currentPassword">現在のパスワード:</label>
+                        <input type="password" id="currentPassword" name="currentPassword">
+                    </div>
+                    <div class="form-group">
+                        <label for="newPassword">新しいパスワード:</label>
+                        <input type="password" id="newPassword" name="newPassword">
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmPassword">新しいパスワード（確認用）:</label>
+                        <input type="password" id="confirmPassword" name="confirmPassword">
+                    </div>
+                    <div class="form-group">
+                        <button type="submit">パスワードを変更</button>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2025 出席簿管理システム. All rights reserved.</p>
+    </footer>
+
+    <script src="kanri.js"></script>
+
+</body>
+</html>

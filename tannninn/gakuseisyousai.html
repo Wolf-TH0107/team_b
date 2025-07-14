@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ja"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../tannninn_css/gakuseisyousai.css">
+    <title>学生情報検索</title>
+
+</head>
+<body>
+
+    <div class="container">
+        <header class="header">
+            <h1>学生情報検索</h1>
+            <div>
+                <a href="javascript:history.back()" class="back-btn">戻る</a>
+                <a href="#" class="logout-btn">ログアウト</a>
+            </div>
+        </header>
+
+        <h2 class="section-title">学生検索</h2>
+
+        <div class="search-area">
+            <form id="studentSearchForm">
+                <div class="search-form">
+                    <div class="form-group">
+                        <label for="department-select">学科検索</label>
+                        <select id="department-select" name="department">
+                            <option value="" selected="selected">全ての学科</option>
+                            <option value="情報工学">情報工学</option>
+                            <option value="機械工学">機械工学</option>
+                            <option value="電気電子工学">電気電子工学</option>
+                            <option value="建築学">建築学</option>
+                            <option value="その他">その他</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="grade-select">学年検索</label>
+                        <select id="grade-select" name="grade">
+                            <option value="" selected="selected">全ての学年</option>
+                            <option value="1年">1年</option>
+                            <option value="2年">2年</option>
+                            <option value="3年">3年</option>
+                            <option value="4年">4年</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="student-name-search">個人検索 (名前/学籍番号)</label>
+                        <input type="text" id="student-name-search" name="keyword" placeholder="例: 山田太郎, 12345">
+                    </div>
+                </div>
+
+                <div class="search-buttons">
+                    <button type="submit">検索</button>
+                    <button type="reset" id="clearSearch">クリア</button>
+                </div>
+            </form>
+        </div>
+
+        <h2 class="section-title">学生情報一覧</h2>
+
+        <div class="student-info-section">
+            <div class="student-list-header">
+                <div>学籍番号</div>
+                <div>氏名</div>
+                <div>学科</div>
+                <div>学年</div>
+                <div>操作</div>
+            </div>
+            <div id="student-list"></div>
+        </div>
+    </div>
+
+    <script>
+
+    </script>
+    <script src="../tanninn_js/gakuseisyousai.js"></script>
+
+</body></html>

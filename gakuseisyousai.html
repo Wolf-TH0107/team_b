@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>学生情報検索</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 20px;
+            background-color: #f4f7f6;
+            color: #333;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 15px;
+        }
+        .header h1 {
+            font-size: 28px;
+            color: #2c3e50;
+            margin: 0;
+        }
+        .header .back-btn, .header .logout-btn {
+            background-color: #3498db;
+            color: white;
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            margin-left: 10px;
+            transition: background-color 0.3s ease;
+        }
+        .header .logout-btn {
+            background-color: #e74c3c;
+        }
+        .header .back-btn:hover {
+            background-color: #2980b9;
+        }
+        .header .logout-btn:hover {
+            background-color: #c0392b;
+        }
+
+        .section-title {
+            font-size: 22px;
+            color: #34495e;
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .search-area {
+            border: 1px solid #ccc;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+        .search-form {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 0; /* gridのgapで調整するため */
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #555;
+            font-size: 14px;
+        }
+        .form-group select,
+        .form-group input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            box-sizing: border-box;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background-image: url('data:image/svg+xml;charset=US-8859-1,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%204%205%22%3E%3Cpath%20fill%3D%22%23333%22%20d%3D%22M2%200L0%202h4zm0%205L0%203h4z%22%2F%3E%3C%2Fsvg%3E');
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            background-size: 12px;
+        }
+        .form-group input[type="text"] {
+            background-image: none; /* テキスト入力には矢印不要 */
+        }
+
+        .search-buttons {
+            text-align: right;
+            margin-top: 20px;
+        }
+        .search-buttons button {
+            background-color: #28a745; /* 検索ボタンの色 */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-left: 10px;
+            transition: background-color 0.3s ease;
+        }
+        .search-buttons button:hover {
+            background-color: #218838;
+        }
+
+        .student-info-section {
+            border: 1px solid #eee;
+            padding: 20px;
+            border-radius: 8px;
+            background-color: #fff;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+        .student-list-header {
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr 1.5fr 1fr; /* 例: 学籍番号, 名前, 学科, 学年, 詳細 */
+            font-weight: bold;
+            padding: 10px 0;
+            border-bottom: 2px solid #ddd;
+            margin-bottom: 10px;
+            color: #444;
+            font-size: 15px;
+        }
+        .student-item {
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr 1.5fr 1fr;
+            padding: 10px 0;
+            border-bottom: 1px dashed #eee;
+            align-items: center;
+        }
+        .student-item:last-child {
+            border-bottom: none;
+        }
+        .student-item div {
+            padding-right: 10px;
+            word-break: break-all; /* 長い文字の折り返し */
+        }
+        .student-item .detail-link {
+            background-color: #007bff;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 13px;
+            transition: background-color 0.2s ease;
+            display: inline-block; /* ボタンのように表示 */
+            text-align: center;
+        }
+        .student-item .detail-link:hover {
+            background-color: #0056b3;
+        }
+        .no-results {
+            text-align: center;
+            color: #777;
+            padding: 30px;
+            font-size: 18px;
+        }
+         .student-info-section {
+            border: 1px solid #eee;
+            padding: 20px;
+            border-radius: 8px;
+            background-color: #fff;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header class="header">
+            <h1>学生情報検索</h1>
+            <div>
+                <a href="javascript:history.back()" class="back-btn">戻る</a>
+                <a href="#" class="logout-btn">ログアウト</a>
+            </div>
+        </header>
+
+        <h2 class="section-title">学生検索</h2>
+
+        <div class="search-area">
+            <form id="studentSearchForm">
+                <div class="search-form">
+                    <div class="form-group">
+                        <label for="department-select">学科検索</label>
+                        <select id="department-select" name="department">
+                            <option value="">全ての学科</option>
+                            <option value="情報工学">情報工学</option>
+                            <option value="機械工学">機械工学</option>
+                            <option value="電気電子工学">電気電子工学</option>
+                            <option value="建築学">建築学</option>
+                            <option value="その他">その他</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="grade-select">学年検索</label>
+                        <select id="grade-select" name="grade">
+                            <option value="">全ての学年</option>
+                            <option value="1年">1年</option>
+                            <option value="2年">2年</option>
+                            <option value="3年">3年</option>
+                            <option value="4年">4年</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="student-name-search">個人検索 (名前/学籍番号)</label>
+                        <input type="text" id="student-name-search" name="keyword" placeholder="例: 山田太郎, 12345">
+                    </div>
+                </div>
+
+                <div class="search-buttons">
+                    <button type="submit">検索</button>
+                    <button type="reset" id="clearSearch">クリア</button>
+                </div>
+            </form>
+        </div>
+
+        <h2 class="section-title">学生情報一覧</h2>
+
+        <div class="student-info-section">
+            <div class="student-list-header">
+                <div>学籍番号</div>
+                <div>氏名</div>
+                <div>学科</div>
+                <div>学年</div>
+                <div>操作</div>
+            </div>
+            <div id="student-list">
+                <p class="no-results">検索条件を入力して検索してください。</p>
+                </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const searchForm = document.getElementById('studentSearchForm');
+            const departmentSelect = document.getElementById('department-select');
+            const gradeSelect = document.getElementById('grade-select');
+            const studentNameSearch = document.getElementById('student-name-search');
+            const studentListDiv = document.getElementById('student-list');
+            const clearSearchButton = document.getElementById('clearSearch');
+
+            // 仮の学生データ（実際にはサーバーサイドから取得します）
+            const allStudents = [
+                { id: 'S001', name: '山田 太郎', department: '情報工学', grade: '3年' },
+                { id: 'S002', name: '鈴木 花子', department: '建築学', grade: '2年' },
+                { id: 'S003', name: '佐藤 健太', department: '情報工学', grade: '1年' },
+                { id: 'S004', name: '高橋 美咲', department: '電気電子工学', grade: '4年' },
+                { id: 'S005', name: '田中 裕子', department: '機械工学', grade: '3年' },
+                { id: 'S006', name: '伊藤 雅人', department: '情報工学', grade: '2年' },
+                { id: 'S007', name: '渡辺 真奈', department: '建築学', grade: '1年' },
+                { id: 'S008', name: '中村 浩司', department: '電気電子工学', grade: '3年' },
+                { id: 'S001', name: '山田 太郎', department: '情報工学', grade: '3年' },
+                { id: 'S002', name: '鈴木 花子', department: '建築学', grade: '2年' },
+                { id: 'S003', name: '佐藤 健太', department: '情報工学', grade: '1年' },
+                { id: 'S004', name: '高橋 美咲', department: '電気電子工学', grade: '4年' },
+                { id: 'S005', name: '田中 裕子', department: '機械工学', grade: '3年' },
+                { id: 'S006', name: '伊藤 雅人', department: '情報工学', grade: '2年' },
+                { id: 'S007', name: '渡辺 真奈', department: '建築学', grade: '1年' },
+                { id: 'S008', name: '中村 浩司', department: '電気電子工学', grade: '3年' },
+            ];
+
+            // 学生情報を表示する関数
+            function displayStudents(students) {
+                studentListDiv.innerHTML = ''; // 既存のリストをクリア
+
+                if (students.length === 0) {
+                    studentListDiv.innerHTML = '<p class="no-results">該当する学生は見つかりませんでした。</p>';
+                    return;
+                }
+
+                students.forEach(student => {
+                    const studentItem = document.createElement('div');
+                    studentItem.classList.add('student-item');
+                    studentItem.innerHTML = `
+                        <div>${student.id}</div>
+                        <div>${student.name}</div>
+                        <div>${student.department}</div>
+                        <div>${student.grade}</div>
+                        <div><a href="student_detail.html?id=${student.id}" class="detail-link">詳細</a></div>
+                    `;
+                    studentListDiv.appendChild(studentItem);
+                });
+            }
+
+            // 初期表示（全ての学生を表示）
+            displayStudents(allStudents);
+
+            // 検索フォームの送信イベント
+            searchForm.addEventListener('submit', (e) => {
+                e.preventDefault(); // デフォルトのフォーム送信を防止
+
+                const selectedDepartment = departmentSelect.value;
+                const selectedGrade = gradeSelect.value;
+                const keyword = studentNameSearch.value.toLowerCase(); // 小文字に変換して比較
+
+                const filteredStudents = allStudents.filter(student => {
+                    const matchesDepartment = selectedDepartment === "" || student.department === selectedDepartment;
+                    const matchesGrade = selectedGrade === "" || student.grade === selectedGrade;
+                    const matchesKeyword = (student.name.toLowerCase().includes(keyword) || student.id.toLowerCase().includes(keyword));
+
+                    return matchesDepartment && matchesGrade && matchesKeyword;
+                });
+
+                displayStudents(filteredStudents);
+            });
+
+            // クリアボタンのクリックイベント
+            clearSearchButton.addEventListener('click', () => {
+                departmentSelect.value = ""; // 学科選択をリセット
+                gradeSelect.value = "";      // 学年選択をリセット
+                studentNameSearch.value = ""; // キーワード入力をリセット
+                displayStudents(allStudents); // 全ての学生を再表示
+            });
+        });
+    </script>
+    <script src="syousai.js"></script>
+</body>
+</html>

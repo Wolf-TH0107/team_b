@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>クラス登録 - 出席簿管理システム</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e8f5e9; /* 薄い緑色 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .register-container {
+            background-color: #ffffff;
+            padding: 35px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 450px;
+            box-sizing: border-box;
+        }
+        .register-container h2 {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #2e7d32; /* 濃いめの緑 */
+            font-size: 28px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #388e3c; /* 中間の緑 */
+            font-weight: bold;
+        }
+        .form-group input[type="text"],
+        .form-group input[type="number"],
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #a5d6a7; /* 薄い緑 */
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+        .form-group input[type="text"]:focus,
+        .form-group input[type="number"]:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-color: #4caf50; /* 緑 */
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
+        }
+        .form-group textarea {
+            resize: vertical; /* 垂直方向のみリサイズ可能に */
+            min-height: 80px;
+        }
+        .form-group button {
+            width: 100%;
+            padding: 15px;
+            background-color: #4caf50; /* 緑 */
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        .form-group button:hover {
+            background-color: #388e3c; /* 少し濃い緑 */
+            transform: translateY(-2px);
+        }
+        .form-group button:active {
+            transform: translateY(0);
+        }
+        .back-link {
+            text-align: center;
+            margin-top: 25px;
+            font-size: 15px;
+        }
+        .back-link a {
+            color: #4caf50;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="register-container">
+        <h2>クラス新規登録</h2>
+        <form action="#" method="post">
+            <div class="form-group">
+                <label for="class_name">クラス名</label>
+                <input type="text" id="class_name" name="class_name" placeholder="例: 1年A組" required>
+            </div>
+            <div class="form-group">
+                <label for="grade">学年</label>
+                <input type="number" id="grade" name="grade" placeholder="例: 1" min="1" max="6" required>
+            </div>
+            <div class="form-group">
+                <label for="teacher_id">担当教員（システムユーザーID）</label>
+                <input type="text" id="teacher_id" name="teacher_id" placeholder="例: yamada.t (担当教員のログインID)" required>
+                </div>
+            <div class="form-group">
+                <label for="academic_year">年度</label>
+                <input type="number" id="academic_year" name="academic_year" placeholder="例: 2025" min="2000" max="2100" required>
+            </div>
+            <div class="form-group">
+                <label for="description">備考</label>
+                <textarea id="description" name="description" placeholder="クラスに関するメモなど"></textarea>
+            </div>
+            <div class="form-group">
+                <button type="submit">クラスを登録</button>
+            </div>
+        </form>
+        <div class="back-link">
+            <p><a href="dashboard.html">ダッシュボードに戻る</a></p>
+        </div>
+    </div>
+</body>
+</html>

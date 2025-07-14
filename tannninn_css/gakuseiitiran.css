@@ -1,0 +1,109 @@
+        /* ここにCSSを追加して、画像のようなレイアウトやデザインを再現します */
+        body {
+            font-family: sans-serif;
+            background-color: #e0f2f7; /* 薄い水色の背景 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .container {
+            background-color: #ffffff;
+            border: 1px solid #cccccc;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px; /* ある程度の最大幅を設定 */
+            box-sizing: border-box;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+        .list-section {
+            border: 1px solid #ccc;
+            padding: 20px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        .list-section h2 {
+            font-size: 1.1em;
+            margin-top: 0;
+            margin-bottom: 10px;
+            color: #555;
+        }
+        .list-section ul {
+            list-style: disc;
+            padding-left: 20px;
+            margin: 0;
+        }
+        .list-section ul li {
+            margin-bottom: 5px;
+        }
+        .detail-button-placeholder {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            border: 1px solid #ccc;
+            padding: 5px 10px;
+            font-size: 0.9em;
+            color: #666;
+        }
+        .input-group {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #ccc; /* 入力欄の周りの枠 */
+        }
+        .input-group label {
+            display: inline-block;
+            margin-right: 10px;
+            color: #333;
+        }
+        .input-group input[type="text"] {
+            width: calc(100% - 80px); /* ラベルの幅を考慮 */
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .button-group {
+            display: flex;
+            justify-content: center;
+            gap: 20px; /* ボタン間のスペース */
+            margin-bottom: 30px;
+        }
+        .button-group button {
+            padding: 10px 25px;
+            font-size: 1em;
+            cursor: pointer;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: #f0f0f0;
+            color: #333;
+            transition: background-color 0.3s ease;
+        }
+        .button-group button:hover {
+            background-color: #e0e0e0;
+        }
+        .return-button {
+            display: block;
+            width: fit-content;
+            margin: 0 auto;
+            padding: 12px 30px;
+            font-size: 1.1em;
+            cursor: pointer;
+            border: 1px solid #007bff; /* 青色のボーダー */
+            border-radius: 4px;
+            background-color: #007bff; /* 青色の背景 */
+            color: white;
+            text-decoration: none; /* リンクとして使う場合 */
+            transition: background-color 0.3s ease;
+        }
+        .return-button:hover {
+            background-color: #0056b3;
+        }

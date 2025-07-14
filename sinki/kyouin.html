@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../sinki_css/kyouin.css" />
+    <title>システムユーザー登録 - 出席簿管理システム</title>
+
+</head>
+<body>
+    <div class="register-container">
+        <h2>システムユーザー新規登録</h2>
+        <form action="#" method="post">
+            <div class="form-group">
+                <label for="username">ユーザー名（表示名）</label>
+                <input type="text" id="username" name="username" placeholder="例: 山田 太郎" required>
+            </div>
+            <div class="form-group">
+                <label for="login_id">ログインID</label>
+                <input type="text" id="login_id" name="login_id" placeholder="例: yamada.t" required>
+            </div>
+            <div class="form-group">
+                <label for="email">メールアドレス</label>
+                <input type="email" id="email" name="email" placeholder="例: your.email@example.com" required>
+            </div>
+            <div class="form-group">
+                <label for="password">パスワード</label>
+                <input type="password" id="password" name="password" placeholder="8文字以上のパスワード" required>
+            </div>
+            <div class="form-group">
+                <label for="confirm_password">パスワード（確認用）</label>
+                <input type="password" id="confirm_password" name="confirm_password" placeholder="パスワードを再度入力してください" required>
+            </div>
+            <div class="form-group">
+                <label for="role">権限</label>
+                <select id="role" name="role" required onchange="toggleTeacherRoleSelection()">
+                    <option value="">選択してください</option>
+                    <option value="admin">管理者</option>
+                    <option value="teacher">教員</option>
+                    </select>
+            </div>
+
+            <div id="teacherRoleSelection" class="form-group">
+                <label>教員の役割:</label><br>
+                <input type="radio" id="roleHomeroom" name="teacherRole" value="homeroom">
+                <label for="roleHomeroom">担任</label>
+                <input type="radio" id="roleInstructor" name="teacherRole" value="instructor">
+                <label for="roleInstructor">講師</label>
+            </div>
+
+            <div class="form-group">
+                <button type="submit">アカウント登録</button>
+            </div>
+        </form>
+        <div class="login-link">
+            <p>既にアカウントをお持ちですか？ <a href="user_login.html">ログインはこちら</a></p>
+        </div>
+    </div>
+
+    <script src="../sinki_js/kyouin.js"></script>
+
+</body>
+</html>
