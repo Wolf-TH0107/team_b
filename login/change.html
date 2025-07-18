@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>アカウント設定</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            background-color: #e0f2f7; /* Light blue background similar to the image */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+        }
+        .form-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            flex: 0 0 120px; /* Fixed width for labels */
+            margin-right: 15px;
+            font-size: 16px;
+            white-space: nowrap; /* Prevent label wrapping */
+        }
+        /* Email input specific style */
+        .form-group input#email {
+            flex-grow: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        /* Password group styling for input and toggle button */
+        .password-group {
+            display: flex;
+            flex-grow: 1; /* Allow password input and toggle to take available space */
+        }
+        .password-group input#password {
+            flex-grow: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-right: none; /* Remove right border for visual connection */
+            border-radius: 4px 0 0 4px; /* Rounded left corners only */
+            font-size: 16px;
+        }
+        .password-toggle {
+            display: flex;
+            align-items: center;
+            padding: 10px 15px;
+            background-color: #f0f0f0; /* Light gray background */
+            border: 1px solid #ccc;
+            border-left: none; /* Remove left border for visual connection */
+            border-radius: 0 4px 4px 0; /* Rounded right corners only */
+            cursor: pointer;
+            font-size: 14px; /* Slightly smaller font for toggle text */
+            user-select: none; /* Prevent text selection on click */
+            /* ここは変更の必要はありません。デフォルトで横書きです */
+        }
+        .password-toggle:hover {
+            background-color: #e0e0e0;
+        }
+
+        .button {
+            margin-left: 15px;
+            padding: 6px 12px
+            width: 30px;
+            height: 45px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1em;
+            cursor: pointer;
+            min-width: 100px; /* ボタンの最小幅 */
+        }
+
+        .button-link {
+            margin: 0 auto;
+            margin-top: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .change-button {
+            background-color: #007bff; /* 青色の更新ボタン */
+            color: white;
+            transition: background-color 0.3s ease;
+        }
+
+        .change {
+            margin: 0 auto;
+            margin-top: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .form-group button {
+            margin-left: 15px;
+            padding: 10px 20px;
+            background-color: #f0f0f0; /* Light gray for button */
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            white-space: nowrap;
+        }
+        .form-group button:hover {
+            background-color: #e0e0e0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="form-group">
+            <label for="email">メールアドレス (現在)</label>
+            <input type="text" id="email" name="email" value="your.email@example.com" readonly>
+            <a href="mail_change.html" class="button-link"><div class="button change-button"><p class="change">変更</p></div></a>
+        </div>
+
+        <div class="form-group">
+            <label for="password">パスワード (現在)</label>
+            <div class="password-group">
+                <input type="password" id="password" name="password" value="********" readonly>
+                <div id="togglePassword" class="password-toggle">×</div> </div>
+            <a href="pass_change.html" class="button-link"><div class="button change-button"><p class="change">変更</p></div></a>
+            
+        </div>
+    </div>
+
+    <script>
+        // パスワード入力欄の要素を取得
+        const passwordInput = document.getElementById('password');
+        // パスワード表示/非表示切り替えボタンの要素を取得
+        const togglePassword = document.getElementById('togglePassword');
+
+        // 切り替えボタンがクリックされた時の処理
+        togglePassword.addEventListener('click', function () {
+            // 現在のinputのtype属性が'password'であれば'text'に、そうでなければ'password'に設定
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+
+            // ボタンのテキストを現在の表示状態に合わせて変更（日本語の「表示」「非表示」に再設定）
+            this.textContent = type === 'password' ? '×' : '👁';
+        });
+    </script>
+</body>
+</html>

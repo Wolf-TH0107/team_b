@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>新しいパスワード設定</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #e0f2f7; /* 薄い水色の背景 */
+            margin: 0;
+            font-family: sans-serif;
+        }
+
+        .container {
+            background-color: #ffffff; /* 白いコンテナ */
+            border: 1px solid #cceeff; /* 薄い水色の枠線 */
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 350px; /* コンテナの幅を調整 */
+            box-sizing: border-box; /* paddingを含めた幅にする */
+        }
+
+        .form-group {
+            margin-bottom: 25px; /* 各フォームグループ間の間隔を調整 */
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+            color: #333;
+        }
+
+        input[type="password"] { /* typeをpasswordに変更 */
+            width: calc(100% - 20px); /* 左右のpaddingを考慮 */
+            padding: 12px 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 1.1em;
+            box-sizing: border-box;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px; /* ボタンとフォームグループの間の間隔 */
+        }
+
+        button {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1em;
+            cursor: pointer;
+            min-width: 100px; /* ボタンの最小幅 */
+        }
+
+        .back-button {
+            background-color: #f0f0f0;
+            color: #555;
+            border: 1px solid #ddd;
+        }
+
+        .update-button {
+            background-color: #007bff; /* 青色の更新ボタン */
+            color: white;
+            transition: background-color 0.3s ease;
+        }
+
+        .update-button:hover {
+            background-color: #0056b3;
+        }
+
+        .back-button:hover {
+            background-color: #e0e0e0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="form-group">
+            <label for="new_password">新しいパスワード</label>
+            <input type="password" id="new_password" name="new_password" placeholder="新しいパスワードを入力">
+        </div>
+        <div class="form-group">
+            <label for="confirm_password">新しいパスワードの再入力</label>
+            <input type="password" id="confirm_password" name="confirm_password" placeholder="新しいパスワードを再入力">
+        </div>
+        <div class="buttons">
+            <button type="button" class="back-button"><a href="change.html" class="button-link">戻る</a></button>
+            <button type="submit" class="update-button">更新</button>
+        </div>
+    </div>
+</body>
+</html>
