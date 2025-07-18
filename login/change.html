@@ -66,46 +66,62 @@
             cursor: pointer;
             font-size: 14px; /* Slightly smaller font for toggle text */
             user-select: none; /* Prevent text selection on click */
-            /* ここは変更の必要はありません。デフォルトで横書きです */
         }
         .password-toggle:hover {
             background-color: #e0e0e0;
         }
 
+        /* --- Common button styles --- */
         .button {
             margin-left: 15px;
-            padding: 6px 12px
-            width: 30px;
-            height: 45px;
+            padding: 6px 12px; /* Adjusted padding for consistent size */
+            width: 80px; /* Set a consistent width for all buttons */
+            height: 40px; /* Set a consistent height for all buttons */
             border: none;
             border-radius: 5px;
             font-size: 1.1em;
             cursor: pointer;
-            min-width: 100px; /* ボタンの最小幅 */
+            display: flex; /* Use flexbox to center content */
+            justify-content: center; /* Center content horizontally */
+            align-items: center; /* Center content vertically */
+            box-sizing: border-box; /* Include padding in the width/height */
         }
 
         .button-link {
-            margin: 0 auto;
-            margin-top: 10px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            text-decoration: none; /* Remove underline from links */
         }
 
         .change-button {
-            background-color: #007bff; /* 青色の更新ボタン */
+            background-color: #007bff; /* Blue for change button */
             color: white;
             transition: background-color 0.3s ease;
         }
 
-        .change {
-            margin: 0 auto;
-            margin-top: 10px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+        .change-button:hover {
+            background-color: #0056b3;
         }
 
+        /* Container for the back button */
+        .back-button-container {
+            margin-top: 30px; /* Space above the back button */
+            text-align: center; /* Center the button in the container */
+        }
+
+        /* Specific styles for the back button */
+        .back-button {
+            background-color: #f0f0f0; /* Light gray for back button */
+            color: #555;
+            border: 1px solid #ddd;
+            transition: background-color 0.3s ease;
+            width: 100px; /* Adjust width as needed for the back button */
+            height: 40px; /* Adjust height as needed for the back button */
+        }
+
+        .back-button:hover {
+            background-color: #e0e0e0;
+        }
+
+        /* This style block is for general buttons, not the "変更" buttons which use .button class */
         .form-group button {
             margin-left: 15px;
             padding: 10px 20px;
@@ -126,16 +142,26 @@
         <div class="form-group">
             <label for="email">メールアドレス (現在)</label>
             <input type="text" id="email" name="email" value="your.email@example.com" readonly>
-            <a href="mail_change.html" class="button-link"><div class="button change-button"><p class="change">変更</p></div></a>
+            <a href="mail_change.html" class="button-link">
+                <div class="button change-button">変更</div>
+            </a>
         </div>
 
         <div class="form-group">
             <label for="password">パスワード (現在)</label>
             <div class="password-group">
                 <input type="password" id="password" name="password" value="********" readonly>
-                <div id="togglePassword" class="password-toggle">×</div> </div>
-            <a href="pass_change.html" class="button-link"><div class="button change-button"><p class="change">変更</p></div></a>
-            
+                <div id="togglePassword" class="password-toggle">×</div>
+            </div>
+            <a href="pass_change.html" class="button-link">
+                <div class="button change-button">変更</div>
+            </a>
+        </div>
+
+        <div class="back-button-container">
+            <a href="roguinngo.html" class="button-link">
+                <div class="button back-button">戻る</div>
+            </a>
         </div>
     </div>
 

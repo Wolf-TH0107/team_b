@@ -53,15 +53,20 @@
             margin-top: 30px; /* ボタンとフォームグループの間の間隔 */
         }
 
-        button {
-            padding: 12px 25px;
+        /* Set common button styles here */
+        .button {
+            padding: 12px 24px;
+            width: 60px; /* Adjust this width as desired for both buttons */
+            height: 40px;
             border: none;
             border-radius: 5px;
             font-size: 1.1em;
             cursor: pointer;
-            min-width: 100px; /* ボタンの最小幅 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
-
+        
         .back-button {
             background-color: #f0f0f0;
             color: #555;
@@ -94,8 +99,8 @@
             <input type="password" id="confirm_password" name="confirm_password" placeholder="新しいパスワードを再入力">
         </div>
         <div class="buttons">
-            <button type="button" class="back-button"><a href="change.html" class="button-link">戻る</a></button>
-            <button type="submit" class="update-button">更新</button>
+            <a href="change.html" class="button-link"><div class="button back-button">戻る</div></a>
+            <a href="change.html" class="button-link"><div class="button update-button">更新</div></a>
         </div>
     </div>
 </body>

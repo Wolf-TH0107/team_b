@@ -1,354 +1,276 @@
 <!DOCTYPE html>
-
 <html lang="ja">
-
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>担任ログイン後画面 - 出欠登録</title>
-
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
-
         body {
-
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-
-            margin: 20px;
-
-            background-color: #f4f7f6;
-
+            font-family: 'Noto Sans JP', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0; /* Remove default body margin */
+            padding: 20px;
+            background-color: #f7f9fc; /* Very light, modern background */
             color: #333;
-
+            line-height: 1.6;
         }
-
-
-        .tanninyou {
-
-            border: 1px solid black;
-
-            margin-bottom: 10px;
-
-            margin-right: 10px;
-
-            margin-left: 10px;
-
-            padding: 10px;
-
-        }
-
 
         .container {
-
-            max-width: 800px;
-
-            margin: 0 auto;
-
-            background-color: #fff;
-
-            padding: 30px;
-
-            border-radius: 8px;
-
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-
+            max-width: 850px; /* Slightly wider container */
+            margin: 40px auto; /* More vertical margin */
+            background-color: #ffffff;
+            padding: 40px; /* More padding inside */
+            border-radius: 12px; /* More pronounced rounded corners */
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08); /* Deeper, softer shadow */
         }
 
         .header {
-
             display: flex;
-
             justify-content: space-between;
-
             align-items: center;
-
-            margin-bottom: 30px;
-
-            border-bottom: 1px solid #eee;
-
-            padding-bottom: 15px;
-
+            margin-bottom: 40px; /* More space below header */
+            border-bottom: 1px solid #e0e6ed; /* Subtle border */
+            padding-bottom: 20px; /* More padding below border */
         }
-
         .header h1 {
-
-            font-size: 24px;
-
+            font-size: 26px; /* Slightly larger */
             color: #2c3e50;
-
             margin: 0;
-
+            font-weight: 700; /* Bolder for modern titles */
         }
-
         .header .logout-btn {
-
-            background-color: #e74c3c;
-
+            background-color: #95a5a6; /* Muted gray for logout */
             color: white;
-
-            padding: 8px 15px;
-
+            padding: 10px 20px; /* More padding */
             border: none;
-
-            border-radius: 5px;
-
+            border-radius: 8px; /* Softer rounded corners */
             cursor: pointer;
-
-            font-size: 14px;
-
+            font-size: 15px; /* Slightly larger font */
             text-decoration: none;
-
+            transition: background-color 0.3s ease, transform 0.1s ease; /* Smooth transition */
+            font-weight: 500;
         }
-
         .header .logout-btn:hover {
-
-            background-color: #c0392b;
-
+            background-color: #7f8c8d; /* Darker gray on hover */
+            transform: translateY(-2px); /* Subtle lift */
+        }
+        .header .logout-btn:active {
+            transform: translateY(0);
         }
 
         .section-title {
-
-            font-size: 20px;
-
+            font-size: 28px; /* Larger, prominent title */
             color: #34495e;
+            margin-bottom: 30px; /* More space below title */
+            padding-bottom: 15px;
+            border-bottom: 2px solid #5a8bd0; /* A primary accent blue for section title underline */
+            font-weight: 700;
+            text-align: center; /* Centered title */
+        }
 
-            margin-bottom: 20px;
-
-            padding-bottom: 10px;
-
-            border-bottom: 1px solid #eee;
-
+        .tanninyou {
+            border: 3px solid #dce4eb; /* Very subtle border */
+            border-radius: 10px; /* Consistent rounded corners */
+            padding: 25px; /* More internal padding */
+            margin-bottom: 30px; /* Space before buttons */
+            background-color: #fcfdfe; /* Slightly off-white background */
         }
 
         .form-group {
-
-            margin-bottom: 15px;
-
+            margin-bottom: 25px; /* More space between form groups */
+        }
+        .form-group:last-of-type {
+            margin-bottom: 0; /* No bottom margin for the last one */
         }
 
         .form-group label {
-
             display: block;
-
-            margin-bottom: 8px;
-
-            font-weight: bold;
-
+            margin-bottom: 10px; /* More space below label */
+            font-weight: 500; /* Medium font weight */
             color: #555;
-
+            font-size: 17px;
         }
-
         .form-group select {
-
             width: 100%;
-
-            padding: 10px;
-
-            border: 1px solid #ccc;
-
-            border-radius: 5px;
-
-            font-size: 16px;
-
-            box-sizing: border-box; /* パディングとボーダーを幅に含める */
-
-            -webkit-appearance: none; /* デフォルトの矢印を非表示に */
-
+            padding: 12px 15px; /* More padding */
+            border: 1px solid #cbd6e2; /* Softer border */
+            border-radius: 8px; /* Consistent rounded corners */
+            font-size: 17px; /* Larger font for readability */
+            color: #444;
+            background-color: #ffffff;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05); /* Subtle inner shadow */
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            -webkit-appearance: none;
             -moz-appearance: none;
-
             appearance: none;
-
-            background-image: url('data:image/svg+xml;charset=US-8859-1,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%204%205%22%3E%3Cpath%20fill%3D%22%23333%22%20d%3D%22M2%200L0%202h4zm0%205L0%203h4z%22%2F%3E%3C%2Fsvg%3E'); /* カスタム矢印 */
-
+            background-image: url('data:image/svg+xml;charset=US-8859-1,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%204%205%22%3E%3Cpath%20fill%3D%22%23666%22%20d%3D%22M2%200L0%202h4zm0%205L0%203h4z%22%2F%3E%3C%2Fsvg%3E'); /* Custom arrow */
             background-repeat: no-repeat;
-
-            background-position: right 10px center;
-
-            background-size: 12px;
-
+            background-position: right 15px center; /* Arrow position */
+            background-size: 10px;
+        }
+        .form-group select:focus {
+            outline: none;
+            border-color: #5a8bd0; /* Highlight on focus */
+            box-shadow: 0 0 0 3px rgba(90, 139, 208, 0.2); /* Subtle focus ring */
         }
 
         .form-group p {
-
-            font-size: 16px;
-
-            padding: 10px;
-
-            border: 1px solid #ddd;
-
-            border-radius: 5px;
-
-            background-color: #f9f9f9;
-
+            font-size: 17px;
+            padding: 12px 15px;
+            border: 1px solid #e0e6ed; /* Subtle border */
+            border-radius: 8px;
+            background-color: #f7f9fc; /* Matches body background for consistency */
+            color: #444;
         }
 
-
-        .touroku{
-
+        .touroku {
             text-align: center;
+            margin-top: 30px; /* More space above the button */
+        }
 
-            align-items: center;
-
-            justify-content: center;
-
+        .touroku1 {
+            background-color: #42a1f5; /* 明るい青 */
+            color: #fff;
+            padding: 14px 30px;
+            border: none; /* この行を追加または既存のborderを削除 */
+            border-radius: 25px; /* ここを8pxから25pxに変更 */
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.1s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            min-width: 200px;
+        }
+        .touroku1:hover {
+            background-color: #b0bec5; /* Slightly darker gray on hover */
+            transform: translateY(-2px);
+        }
+        .touroku1:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
         }
 
         .jikan {
-
             display: grid;
-
-            grid-template-columns: repeat(2, 1fr);
-
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsive, larger min-width */
+            gap: 25px; /* More space between buttons */
+            margin-top: 40px; /* More space above this section */
         }
 
-
-        .gakusei{
-
-            margin-top: 10px;
-
+        .gakusei {
+            margin-top: 25px; /* More space above the button */
             text-align: center;
-
-            align-items: center;
-
-            justify-content: center;
-
         }
 
+        /* Styles for the navigation buttons */
+        .jikannwari-btn, .usersettei-btn, .gakuseijyouhou-btn {
+            color: white;
+            padding: 16px 30px; /* More padding */
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: 600; /* Semibold */
+            width: 100%;
+            box-sizing: border-box;
+            transition: background-color 0.3s ease, transform 0.1s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* Consistent shadow */
+        }
 
+        .jikannwari-btn {
+            background-color: #66bb6a; /* Vibrant but not overly bright green */
+        }
+        .jikannwari-btn:hover {
+            background-color: #4caf50;
+            transform: translateY(-2px);
+        }
+        .jikannwari-btn:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .usersettei-btn {
+            background-color: #ffa726; /* Warm orange */
+        }
+        .usersettei-btn:hover {
+            background-color: #fb8c00;
+            transform: translateY(-2px);
+        }
+        .usersettei-btn:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .gakuseijyouhou-btn {
+            background-color: #8862d0; /* Rich purple */
+            margin-top: 25px; /* Consistent margin for the single button */
+        }
+        .gakuseijyouhou-btn:hover {
+            background-color: #7b4ac7;
+            transform: translateY(-2px);
+        }
+        .gakuseijyouhou-btn:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
     </style>
-
 </head>
-
 <body>
-
     <div class="container">
-
         <header class="header">
-
-            <h1>担任：<span id="teacher-name">田中 太郎</span></h1>
-
+            <h1>担任：<span id="teacher-name">黒澤 勝</span></h1>
             <a href="#" class="logout-btn">ログアウト</a>
-
         </header>
-
 
         <h2 class="section-title">＜ 出欠登録 ＞</h2>
 
-
-    <div class="tanninyou">
-
-        <div class="form-group">
-
-            <label for="class-select">クラス</label>
-
-            <select id="class-select">
-
-                <option value="">クラスを選択してください</option>
-
-                <option value="1-1">1年1組</option>
-
-                <option value="1-2">1年2組</option>
-
-                <option value="2-1">2年1組</option>
-
-                <option value="3-1">3年1組</option>
-
+        <div class="tanninyou">
+            <div class="form-group">
+                <label for="class-select">クラス</label>
+                <select id="class-select">
+                    <option value="">クラスを選択してください</option>
+                    <option value="1-1">1年1組</option>
+                    <option value="1-2">1年2組</option>
+                    <option value="2-1">2年1組</option>
+                    <option value="3-1">3年1組</option>
                 </select>
+            </div>
 
-        </div>
-
-
-        <div class="form-group">
-
-            <label for="period-select">コマ</label>
-
-            <select id="period-select">
-
-                <option value="">コマを選択してください</option>
-
-                <option value="1">1時間目</option>
-
-                <option value="2">2時間目</option>
-
-                <option value="3">3時間目</option>
-
-                <option value="4">4時間目</option>
-
-                <option value="5">5時間目</option>
-
-                <option value="6">6時間目</option>
-
+            <div class="form-group">
+                <label for="period-select">コマ</label>
+                <select id="period-select">
+                    <option value="">コマを選択してください</option>
+                    <option value="1">1時間目</option>
+                    <option value="2">2時間目</option>
+                    <option value="3">3時間目</option>
+                    <option value="4">4時間目</option>
+                    <option value="5">5時間目</option>
+                    <option value="6">6時間目</option>
                 </select>
+            </div>
 
-        </div>
+            <div class="form-group">
+                <label>カレンダー初期値</label>
+                <p id="calendar-initial-value">NOW</p>
+            </div>
 
+            <div class="touroku">
+                <button class="touroku1">登録画面へ</button>
+            </div></div><div class="button">
+            <div class="jikan">
+                <button class="jikannwari-btn">時間割確認画面へ</button>
+                <button class="usersettei-btn">ユーザ設定へ</button>
+            </div><div class="gakusei">
+                <button class="gakuseijyouhou-btn">学生情報ページへ</button>
+            </div></div><script>
+            // JavaScriptを使って動的に先生の名前を設定する場合の例
+            // 例えば、ログイン時に取得した先生の名前をここに挿入します
+            // document.getElementById('teacher-name').textContent = "山田 花子";
 
-        <div class="form-group">
-
-            <label>カレンダー初期値</label>
-
-            <p id="calendar-initial-value">NOW</p>
-
-        </div>
-
-
-        <div class="touroku">
-
-            <button class="touroku1">登録画面へ</button>
-
-        </div><!-- /.touroku -->
-
-
-    </div><!-- /.tanninyou -->
-
-
-        
-
-    <div class="button">
-
-        <div class="jikan">
-
-
-            <button class="jikannwari">時間割確認画面へ</button>
-
-
-            <button class="usersettei">ユーザ設定へ</button>
-
-
-        </div><!-- /.jikan -->
-
-
-    <div class="gakusei">
-
-        <button class="gakuseijyouhou">学生情報ページへ</button>
-
-    </div><!-- /.gakusei -->
-
-
-    </div><!-- /.button -->
-
-
-    <script>
-
-        // JavaScriptを使って動的に先生の名前を設定する場合の例
-
-        // 例えば、ログイン時に取得した先生の名前をここに挿入します
-
-        // document.getElementById('teacher-name').textContent = "山田 花子";
-
-
-        // カレンダーの初期値を現在の日付にする場合の例（オプション）
-
-        // const now = new Date();
-
-        // const options = { year: 'numeric', month: 'long', day: 'numeric' };
-
-        // document.getElementById('calendar-initial-value').textContent = now.toLocaleDateString('ja-JP', options);
-
-    </script>
-
+            // カレンダーの初期値を現在の日付にする場合の例（オプション）
+            // const now = new Date();
+            // const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            // document.getElementById('calendar-initial-value').textContent = now.toLocaleDateString('ja-JP', options);
+        </script>
 </body>
-
-</html> 
+</html>
