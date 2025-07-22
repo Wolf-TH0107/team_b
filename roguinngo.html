@@ -39,20 +39,20 @@
             font-weight: 700; /* Bolder for modern titles */
         }
         .header .logout-btn {
-            background-color: #95a5a6; /* Muted gray for logout */
+            background-color: #e74c3c; /* 鮮やかな赤色 */
             color: white;
-            padding: 10px 20px; /* More padding */
+            padding: 10px 20px;
             border: none;
-            border-radius: 8px; /* Softer rounded corners */
+            border-radius: 8px;
             cursor: pointer;
-            font-size: 15px; /* Slightly larger font */
+            font-size: 15px;
             text-decoration: none;
-            transition: background-color 0.3s ease, transform 0.1s ease; /* Smooth transition */
+            transition: background-color 0.3s ease, transform 0.1s ease;
             font-weight: 500;
         }
         .header .logout-btn:hover {
-            background-color: #7f8c8d; /* Darker gray on hover */
-            transform: translateY(-2px); /* Subtle lift */
+            background-color: #c0392b; /* ホバー時に少し暗い赤色に */
+            transform: translateY(-2px);
         }
         .header .logout-btn:active {
             transform: translateY(0);
@@ -132,8 +132,8 @@
             background-color: #42a1f5; /* 明るい青 */
             color: #fff;
             padding: 14px 30px;
-            border: none; /* この行を追加または既存のborderを削除 */
-            border-radius: 25px; /* ここを8pxから25pxに変更 */
+            border: none;
+            border-radius: 25px;
             cursor: pointer;
             font-size: 18px;
             font-weight: 600;
@@ -163,10 +163,10 @@
         }
 
         /* Styles for the navigation buttons */
-        .jikannwari-btn, .usersettei-btn, .gakuseijyouhou-btn {
+        .jikannwari-btn, .change-btn, .gakuseijyouhou-btn {
             color: white;
             padding: 16px 30px; /* More padding */
-            border: none;
+            border: none; /* Ensure no border by default */
             border-radius: 8px;
             cursor: pointer;
             font-size: 18px;
@@ -175,6 +175,12 @@
             box-sizing: border-box;
             transition: background-color 0.3s ease, transform 0.1s ease, box-shadow 0.3s ease;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* Consistent shadow */
+        }
+
+        /* This is the key change to remove the underline from the link */
+        .button-link {
+            text-decoration: none; /* Remove underline from the link */
+            display: block; /* Ensures the link takes up the full button area */
         }
 
         .jikannwari-btn {
@@ -189,14 +195,28 @@
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
         }
 
-        .usersettei-btn {
+        .change-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            padding: 16px 30px;
+            border: none; /* Already set, but confirming it's here */
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: 600;
+            width: 100%;
+            box-sizing: border-box;
+            transition: background-color 0.3s ease, transform 0.1s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
             background-color: #ffa726; /* Warm orange */
         }
-        .usersettei-btn:hover {
+        .change-btn:hover {
             background-color: #fb8c00;
             transform: translateY(-2px);
         }
-        .usersettei-btn:active {
+        .change-btn:active {
             transform: translateY(0);
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
         }
@@ -256,13 +276,20 @@
 
             <div class="touroku">
                 <button class="touroku1">登録画面へ</button>
-            </div></div><div class="button">
+            </div>
+        </div>
+        <div class="button">
             <div class="jikan">
                 <button class="jikannwari-btn">時間割確認画面へ</button>
-                <button class="usersettei-btn">ユーザ設定へ</button>
-            </div><div class="gakusei">
+                <a href="change.html" class="button-link">
+                    <button class="change-btn">ユーザ設定</button>
+                </a>
+            </div>
+            <div class="gakusei">
                 <button class="gakuseijyouhou-btn">学生情報ページへ</button>
-            </div></div><script>
+            </div>
+        </div>
+        <script>
             // JavaScriptを使って動的に先生の名前を設定する場合の例
             // 例えば、ログイン時に取得した先生の名前をここに挿入します
             // document.getElementById('teacher-name').textContent = "山田 花子";
