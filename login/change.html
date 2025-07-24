@@ -4,141 +4,141 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>アカウント設定</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: sans-serif;
-            background-color: #e0f2f7; /* Light blue background similar to the image */
+            font-family: 'Noto Sans JP', sans-serif;
+            background-color: #f0f2f5; /* Light gray background for modern feel */
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             margin: 0;
+            color: #333;
         }
         .container {
             background-color: #ffffff;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 40px; /* Increased padding */
+            border-radius: 12px; /* More rounded corners */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); /* Softer, larger shadow */
             width: 100%;
-            max-width: 500px;
+            max-width: 700px; /* Slightly wider max-width */
+            box-sizing: border-box;
         }
+
+        h2 {
+            font-size: 1.8em;
+            color: #2c3e50;
+            margin-bottom: 35px; /* More space below heading */
+            font-weight: 700;
+            text-align: center;
+        }
+
         .form-group {
             display: flex;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 25px; /* Adjusted spacing between groups */
         }
         .form-group label {
-            flex: 0 0 120px; /* Fixed width for labels */
-            margin-right: 15px;
-            font-size: 16px;
-            white-space: nowrap; /* Prevent label wrapping */
+            flex: 0 0 140px; /* Slightly wider fixed width for labels */
+            margin-right: 20px; /* More space between label and input */
+            font-size: 1em;
+            white-space: nowrap;
+            color: #555;
+            font-weight: 500;
         }
-        /* Email input specific style */
-        .form-group input#email {
+
+        /* Common input styles */
+        .form-group input {
             flex-grow: 1;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-size: 16px;
+            padding: 14px 15px; /* Consistent padding */
+            border: 1px solid #e0e0e0; /* Lighter border */
+            border-radius: 8px; /* More rounded input fields */
+            font-size: 1.05em;
+            box-sizing: border-box;
+            background-color: #fcfcfc; /* Slightly off-white background for inputs */
         }
 
         /* Password group styling for input and toggle button */
         .password-group {
             display: flex;
-            flex-grow: 1; /* Allow password input and toggle to take available space */
+            flex-grow: 1;
         }
         .password-group input#password {
-            flex-grow: 1;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-right: none; /* Remove right border for visual connection */
-            border-radius: 4px 0 0 4px; /* Rounded left corners only */
-            font-size: 16px;
+            border-right: none;
+            border-radius: 8px 0 0 8px; /* Rounded left corners only */
         }
         .password-toggle {
             display: flex;
             align-items: center;
             padding: 10px 15px;
-            background-color: #f0f0f0; /* Light gray background */
-            border: 1px solid #ccc;
-            border-left: none; /* Remove left border for visual connection */
-            border-radius: 0 4px 4px 0; /* Rounded right corners only */
+            background-color: #f0f0f0;
+            border: 1px solid #e0e0e0; /* Consistent border color */
+            border-left: none;
+            border-radius: 0 8px 8px 0; /* Rounded right corners only */
             cursor: pointer;
-            font-size: 14px; /* Slightly smaller font for toggle text */
-            user-select: none; /* Prevent text selection on click */
+            font-size: 1.2em; /* Larger icon/text for toggle */
+            font-weight: bold; /* Make it bolder */
+            user-select: none;
+            color: #666; /* Softer color for the toggle icon */
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
         .password-toggle:hover {
             background-color: #e0e0e0;
+            color: #333;
         }
 
         /* --- Common button styles --- */
-        .button {
-            margin-left: 15px;
-            padding: 6px 12px; /* Adjusted padding for consistent size */
-            width: 80px; /* Set a consistent width for all buttons */
-            height: 40px; /* Set a consistent height for all buttons */
-            border: none;
-            border-radius: 5px;
-            font-size: 1.1em;
-            cursor: pointer;
-            display: flex; /* Use flexbox to center content */
-            justify-content: center; /* Center content horizontally */
-            align-items: center; /* Center content vertically */
-            box-sizing: border-box; /* Include padding in the width/height */
-        }
-
         .button-link {
-            text-decoration: none; /* Remove underline from links */
+            text-decoration: none;
+            margin-left: 20px; /* Space between input and button */
+        }
+        .button {
+            padding: 12px 25px; /* Adjusted padding for a better look */
+            min-width: 100px; /* Ensure buttons have a good minimum width */
+            border: none;
+            border-radius: 8px; /* More rounded buttons */
+            font-size: 1.05em;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-sizing: border-box;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            font-weight: 500;
         }
 
         .change-button {
-            background-color: #007bff; /* Blue for change button */
+            background-color: #007bff;
             color: white;
-            transition: background-color 0.3s ease;
         }
-
         .change-button:hover {
             background-color: #0056b3;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 123, 255, 0.2);
         }
 
-        /* Container for the back button */
         .back-button-container {
-            margin-top: 30px; /* Space above the back button */
-            text-align: center; /* Center the button in the container */
+            margin-top: 40px; /* More space above the back button */
+            text-align: center;
         }
-
-        /* Specific styles for the back button */
         .back-button {
-            background-color: #f0f0f0; /* Light gray for back button */
-            color: #555;
-            border: 1px solid #ddd;
-            transition: background-color 0.3s ease;
-            width: 100px; /* Adjust width as needed for the back button */
-            height: 40px; /* Adjust height as needed for the back button */
+            background-color: #e9ecef;
+            color: #495057;
+            border: 1px solid #dee2e6;
+            width: 120px; /* Consistent width for the back button */
         }
-
         .back-button:hover {
-            background-color: #e0e0e0;
-        }
-
-        /* This style block is for general buttons, not the "変更" buttons which use .button class */
-        .form-group button {
-            margin-left: 15px;
-            padding: 10px 20px;
-            background-color: #f0f0f0; /* Light gray for button */
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
-            white-space: nowrap;
-        }
-        .form-group button:hover {
-            background-color: #e0e0e0;
+            background-color: #dae0e5;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
     </style>
 </head>
 <body>
     <div class="container">
+        <h2>アカウント設定</h2>
+
         <div class="form-group">
             <label for="email">メールアドレス (現在)</label>
             <input type="text" id="email" name="email" value="your.email@example.com" readonly>
@@ -151,8 +151,7 @@
             <label for="password">パスワード (現在)</label>
             <div class="password-group">
                 <input type="password" id="password" name="password" value="********" readonly>
-                <div id="togglePassword" class="password-toggle">×</div>
-            </div>
+                <div id="togglePassword" class="password-toggle">👁</div> </div>
             <a href="pass_change.html" class="button-link">
                 <div class="button change-button">変更</div>
             </a>
@@ -166,19 +165,15 @@
     </div>
 
     <script>
-        // パスワード入力欄の要素を取得
         const passwordInput = document.getElementById('password');
-        // パスワード表示/非表示切り替えボタンの要素を取得
         const togglePassword = document.getElementById('togglePassword');
 
-        // 切り替えボタンがクリックされた時の処理
         togglePassword.addEventListener('click', function () {
-            // 現在のinputのtype属性が'password'であれば'text'に、そうでなければ'password'に設定
             const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
             passwordInput.setAttribute('type', type);
 
-            // ボタンのテキストを現在の表示状態に合わせて変更（日本語の「表示」「非表示」に再設定）
-            this.textContent = type === 'password' ? '×' : '👁';
+            // Toggle between eye icon and eye-slash icon
+            this.textContent = type === 'password' ? '👁' : '×'; // Using '×' for visibility off
         });
     </script>
 </body>

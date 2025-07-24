@@ -3,8 +3,205 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../tannninn_css/gakuseijyouhousyousai.css" />
-    <title>学生詳細情報</title>
+    <title>学生詳細情報 - 出席簿管理システム</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            background-color: #f0f2f5; /* Light gray background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 12px; /* More rounded corners */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); /* Softer, larger shadow */
+            width: 100%;
+            max-width: 800px; /* Wider container for more info */
+            box-sizing: border-box;
+            text-align: center; /* Center main title */
+        }
+
+        .main-title {
+            font-size: 2em;
+            color: #2c3e50;
+            margin-bottom: 35px;
+            font-weight: 700;
+        }
+
+        .info-block, .attendance-info, .subjects-block {
+            background-color: #f8faff; /* Light blue background for info sections */
+            border: 1px solid #e0e6f0; /* Soft border */
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 30px; /* Space between blocks */
+            text-align: left;
+        }
+
+        .info-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 18px; /* Spacing between info rows */
+        }
+        .info-row:last-child {
+            margin-bottom: 0; /* No margin for the last item */
+        }
+
+        .info-row label {
+            flex: 0 0 140px; /* Consistent width for labels */
+            margin-right: 20px;
+            font-size: 1em;
+            color: #555;
+            font-weight: 500;
+            white-space: nowrap; /* Prevent label wrapping */
+        }
+
+        .info-row input[type="text"] {
+            flex-grow: 1; /* Inputs take remaining space */
+            padding: 12px 15px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1.05em;
+            background-color: #ffffff; /* White background for inputs */
+            color: #333;
+            box-sizing: border-box;
+            -webkit-appearance: none; /* Remove default appearance for consistency */
+            -moz-appearance: none;
+            appearance: none;
+        }
+
+        /* Specific style for 学年 and 入学年度 inputs */
+        .info-row #grade, .info-row #enrollment-year {
+            width: 100px; /* Fixed width for these specific inputs */
+            flex-grow: 0;
+        }
+        .info-row label[for="enrollment-year"] {
+            flex: 0 0 auto; /* Allow this label to shrink/grow */
+            margin-left: 30px; /* More space to separate visually */
+        }
+
+        /* Attendance Info Block */
+        .attendance-info {
+            display: flex;
+            justify-content: space-around;
+            gap: 20px;
+            padding: 25px 30px; /* Slightly less padding for these items */
+        }
+        .attendance-item {
+            text-align: center;
+            flex-grow: 1;
+            padding: 15px 0;
+            border: 1px solid #dce4ef; /* Slightly darker border for attendance items */
+            border-radius: 10px;
+            background-color: #ffffff;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); /* Subtle shadow for items */
+        }
+        .attendance-item label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 0.95em;
+            color: #666;
+            font-weight: 500;
+        }
+        .attendance-item input[type="text"] {
+            width: 80px; /* Fixed width for attendance numbers */
+            padding: 8px 10px;
+            font-size: 1.4em; /* Larger font for numbers */
+            font-weight: 700;
+            border: none;
+            text-align: center;
+            background-color: transparent;
+        }
+        .attendance-item .percentage {
+            font-size: 1.2em;
+            font-weight: 700;
+            color: #555;
+            margin-left: 5px;
+        }
+
+        /* Subjects Block */
+        .subjects-block h3 {
+            font-size: 1.5em;
+            color: #2c3e50;
+            margin-bottom: 25px;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .subjects-table-container {
+            overflow-x: auto; /* Enable horizontal scrolling for narrow screens */
+        }
+
+        .subjects-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        .subjects-table th, .subjects-table td {
+            padding: 12px 15px;
+            border: 1px solid #e0e6f0; /* Consistent border for table cells */
+            text-align: center;
+            font-size: 0.95em;
+        }
+
+        .subjects-table thead th {
+            background-color: #eaf1f8; /* Light blue header */
+            color: #2c3e50;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .subjects-table tbody tr:nth-child(even) {
+            background-color: #fcfdfe; /* Subtle stripe effect */
+        }
+
+        .subjects-table tbody tr:hover {
+            background-color: #eef5fc; /* Highlight row on hover */
+        }
+
+        .subjects-table td a {
+            color: #007bff;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        .subjects-table td a:hover {
+            color: #0056b3;
+            text-decoration: underline;
+        }
+
+        /* Back Button */
+        .back-button-container {
+            margin-top: 40px;
+            text-align: center;
+        }
+
+        .back-button {
+            display: inline-block;
+            padding: 14px 30px;
+            background-color: #e9ecef; /* Light gray for back button */
+            color: #495057;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            font-size: 1.05em;
+            font-weight: 500;
+            text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+        }
+
+        .back-button:hover {
+            background-color: #dae0e5;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
 </head>
 <body>
 
@@ -14,43 +211,43 @@
         <div class="info-block">
             <div class="info-row">
                 <label for="student-id">学籍番号</label>
-                <input type="text" id="student-id" value="" readonly>
+                <input type="text" id="student-id" value="S1234567" readonly>
             </div>
             <div class="info-row">
                 <label for="department-course">学科・コース</label>
-                <input type="text" id="department-course" value="" readonly>
+                <input type="text" id="department-course" value="情報テクノロジー学科・Webデザインコース" readonly>
             </div>
             <div class="info-row">
                 <label for="grade">学年</label>
-                <input type="text" id="grade" value="" style="width: 80px; flex-grow: 0;" readonly>
-                <label for="enrollment-year" style="margin-left: 20px;">入学年度</label>
-                <input type="text" id="enrollment-year" value="" style="width: 80px; flex-grow: 0;" readonly>
+                <input type="text" id="grade" value="3" readonly>
+                <label for="enrollment-year">入学年度</label>
+                <input type="text" id="enrollment-year" value="2023" readonly>
             </div>
             <div class="info-row">
                 <label for="name">名前</label>
-                <input type="text" id="name" value="" readonly>
+                <input type="text" id="name" value="田中 太郎" readonly>
             </div>
             <div class="info-row">
                 <label for="name-furigana">名前（フリガナ）</label>
-                <div class="name-furigana-input">
-                    <input type="text" id="name-furigana" value="" readonly>
-                </div>
+                <input type="text" id="name-furigana" value="タナカ タロウ" readonly>
             </div>
             <div class="info-row">
                 <label for="enrollment-status">在籍状況</label>
-                <input type="text" id="enrollment-status" value="" readonly>
+                <input type="text" id="enrollment-status" value="在籍中" readonly>
             </div>
         </div>
 
         <div class="attendance-info">
             <div class="attendance-item">
                 <label for="total-attendance">総出席率</label>
-                <input type="text" id="total-attendance" value="" readonly>
-                <span class="percentage">%</span>
+                <div>
+                    <input type="text" id="total-attendance" value="95" readonly>
+                    <span class="percentage">%</span>
+                </div>
             </div>
             <div class="attendance-item">
                 <label for="absent-count">欠課数</label>
-                <input type="text" id="absent-count" value="" readonly>
+                <input type="text" id="absent-count" value="5" readonly>
             </div>
         </div>
 
@@ -69,8 +266,7 @@
                             <th>詳細</th>
                         </tr>
                     </thead>
-                    <tbody id="subjects-table-body">
-                        </tbody>
+                    
                 </table>
             </div>
         </div>
@@ -81,6 +277,5 @@
     </div>
 
     <script src="../tanninn_js/gakuseisyousai.js"></script>
-
-</body>
+    </body>
 </html>
